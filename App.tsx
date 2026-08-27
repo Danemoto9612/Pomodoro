@@ -9,6 +9,7 @@ const colores = ["#cc6666", "#66cc99", "#66cccc", "#a569bd"];
 
 export default function App() {
   const [time, setTime] = useState(25 * 60);
+  const [previusTime, setPreviusTime] = useState(time);
   const [currentTime, setCurrentTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
@@ -32,13 +33,12 @@ export default function App() {
     }
   }
 
+  function restart() {
+    setTime(previusTime);
+  }
+
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: colores[currentTime] },
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor: colores[currentTime] }]}>
       <Text style={styles.titulo}>Pomodoro</Text>
       <Header
         setTime={setTime}
@@ -48,20 +48,32 @@ export default function App() {
       />
       <SessionInfo currentTime={currentTime} />
       <Timer time={time} />
-      <TouchableOpacity
-        onPress={toggleTimer}
-        activeOpacity={0.6}
-        style={styles.imageButton}
-      >
-        <Image
-          source={require("./assets/pomodoro.png")}
-          style={styles.imagen}
-        />
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          onPress={toggleTimer}
+          activeOpacity={0.6}
+          style={styles.imageButton}
+        >
+          <Image
+            source={require("./assets/pomodoro.png")}
+            style={styles.imagen}
+          />
 
-        <Text style={styles.buttonText}>
-          {isActive ? "Pausar" : "Iniciar"}
-        </Text>
-      </TouchableOpacity>
+          <Text style={styles.buttonText}>
+            {isActive ? "Pausar" : "Iniciar"}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={restart}
+          activeOpacity={0.6}
+          style={styles.imageButton}
+        >
+          <Image source={require("./assets/chili.png")} style={styles.imagen} />
+
+          <Text style={styles.buttonText}>Restaurar</Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -98,5 +110,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 8,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 30,
   },
 });
