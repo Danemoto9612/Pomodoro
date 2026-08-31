@@ -27,9 +27,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 50,
     marginBottom: 20,
-    borderColor: "white",
-    borderWidth: 3,
-    borderRadius: 15,
   },
 
   time: {
