@@ -9,9 +9,10 @@ interface Props {
   currentTime: number;
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreviusTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Header({ setTime, currentTime, setCurrentTime, setIsActive }: Props) {
+export default function Header({ setTime, currentTime, setCurrentTime, setIsActive, setPreviusTime }: Props) {
   const [customMinutes, setCustomMinutes] = useState("");
 
   function handlePress(index: number): void {
@@ -19,15 +20,19 @@ export default function Header({ setTime, currentTime, setCurrentTime, setIsActi
     setCurrentTime(index);
     if (index === 0) {
       setTime(25 * 60);
+      setPreviusTime(25 * 60);
     }
     if (index === 1) {
       setTime(5 * 60);
+      setPreviusTime(5 * 60);
     }
     if (index === 2) {
       setTime(15 * 60);
+      setPreviusTime(15 * 60);
     }
     if (index === 3) {
       setTime(0);
+      setPreviusTime(0);
     }
   }
 
@@ -35,6 +40,7 @@ export default function Header({ setTime, currentTime, setCurrentTime, setIsActi
     const minutes = Number(customMinutes);
     if (minutes > 0) {
       setTime(minutes * 60);
+      setPreviusTime(minutes * 60);
       setCurrentTime(3);
       setIsActive(false);
       setCustomMinutes("");

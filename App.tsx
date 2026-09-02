@@ -45,6 +45,7 @@ export default function App() {
         currentTime={currentTime}
         setCurrentTime={setCurrentTime}
         setIsActive={setIsActive}
+        setPreviusTime={setPreviusTime}
       />
       <SessionInfo currentTime={currentTime} />
       <Timer time={time} />
